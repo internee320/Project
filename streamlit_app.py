@@ -224,4 +224,5 @@ if uploaded_file:
 
 else:
     # Empty State
+
     st.info("Please upload a CSV file to start searching.")
