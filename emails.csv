@@ -1,0 +1,47 @@
+Username,Date,Subject,Body
+alice.smith@company.com,2023-10-01,Urgent: Server Down,The main database server is unresponsive.
+bob.jones@company.com,2023-10-02,Invoice #4022 Pending,Please clear the outstanding invoice by Friday.
+manager.robert@company.com,2023-10-03,Project Alpha Kickoff,Meeting scheduled for 10 AM in Room 4.
+hr.department@company.com,2023-10-04,New Policy Update,Please read the attached handbook regarding remote work.
+support@vendor.com,2023-10-05,Ticket #9921 Resolved,Your issue has been fixed. Please confirm.
+alice.smith@company.com,2023-10-06,Re: Project Alpha,Here are the slides for the presentation.
+john.doe@company.com,2023-10-07,Security Alert: Phishing,Delete any emails titled "You won a prize".
+sarah.connor@company.com,2023-10-08,Quarterly Review,We need to finalize the numbers for Q3.
+bob.jones@company.com,2023-10-09,Lunch Menu Update,The cafeteria will serve tacos on Tuesday.
+it.helpdesk@company.com,2023-10-10,Password Expiry,Your password expires in 3 days.
+manager.robert@company.com,2023-10-11,Urgent: Client Complaint,Client X is unhappy with the delay.
+finance@company.com,2023-10-12,Budget Approval,The budget for the Marketing team is approved.
+alice.smith@company.com,2023-10-13,Server Maintenance,Scheduled downtime from 2 AM to 4 AM.
+dev.team@company.com,2023-10-14,Code Review Needed,Please review the pull request for login module.
+hr.department@company.com,2023-10-15,Holiday Schedule,Office will be closed on Monday for the holiday.
+bob.jones@company.com,2023-10-16,Invoice #4023,Payment received successfully.
+john.doe@company.com,2023-10-17,Meeting Rescheduled,The sync is moved to Wednesday.
+sarah.connor@company.com,2023-10-18,Project Deadline,The alpha version must be shipped today.
+security@company.com,2023-10-19,Two-Factor Auth,Please enable 2FA on your account immediately.
+manager.robert@company.com,2023-10-20,Team Building Event,Join us for bowling this Friday.
+alice.smith@company.com,2023-10-21,Database Backup,Backup completed successfully.
+it.helpdesk@company.com,2023-10-22,Printer Jam,The printer on floor 2 is jammed again.
+client.x@external.com,2023-10-23,Contract Renewal,We are looking forward to another year.
+bob.jones@company.com,2023-10-24,Invoice #4024 Overdue,Please pay immediately to avoid late fees.
+hr.department@company.com,2023-10-25,Open Positions,We are hiring for a new Senior Developer.
+john.doe@company.com,2023-10-26,Urgent: Lost Key,Someone lost their access badge for Floor 3.
+dev.team@company.com,2023-10-27,Bug Report #501,The app crashes when uploading images.
+alice.smith@company.com,2023-10-28,Network Upgrade,Internet speed will be doubled next week.
+manager.robert@company.com,2023-10-29,Strategy Planning,All hands meeting for Q4 strategy.
+finance@company.com,2023-10-30,Expense Report,Please submit your expenses for October.
+support@vendor.com,2023-10-31,End of Month Summary,Here is your usage report for October.
+sarah.connor@company.com,2023-11-01,November Newsletter,Check out what happened last month.
+it.helpdesk@company.com,2023-11-02,Software Update,Please update your Slack application.
+bob.jones@company.com,2023-11-03,Invoice #4025,Monthly subscription charge.
+hr.department@company.com,2023-11-04,Training Session,Mandatory compliance training at 2 PM.
+alice.smith@company.com,2023-11-05,Project Beta Release,Beta version is now live for testing.
+manager.robert@company.com,2023-11-06,Feedback Request,Please fill out the employee satisfaction survey.
+john.doe@company.com,2023-11-07,Security Drill,We will conduct a fire drill today.
+client.x@external.com,2023-11-08,Meeting Notes,Attached are the notes from our call.
+dev.team@company.com,2023-11-09,Deployment Pipeline,CI/CD pipeline is now automated.
+sarah.connor@company.com,2023-11-10,Marketing Campaign,Launch date set for Black Friday.
+it.helpdesk@company.com,2023-11-11,Virus Warning,Do not open the attachment from "Unknown".
+bob.jones@company.com,2023-11-12,Invoice #4026,Correction on the previous invoice.
+alice.smith@company.com,2023-11-13,Cloud Migration,Moving legacy data to AWS.
+hr.department@company.com,2023-11-14,Benefits Enrollment,Open enrollment starts next week.
+manager.robert@company.com,2023-11-15,Urgent: Deadline Extension,Client agreed to extend by 2 days.
