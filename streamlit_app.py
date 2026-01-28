@@ -1,8 +1,8 @@
 import streamlit as st
 import pandas as pd
 import torch
-from sentence_transformers import SentenceTransformer, util
-from transformers import pipeline
+# Import specific classes to avoid the broken pipeline registry
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
 # --- CONFIGURATION ---
 MAX_FILE_SIZE_MB = 500
@@ -93,21 +93,47 @@ st.markdown("""
 # --- 2. HELPER FUNCTIONS ---
 
 @st.cache_resource
-def load_summarizer():
-    # FIX: Changed "summarization" to "text2text-generation" to avoid KeyError in some environments.
-    # This performs the exact same function for Seq2Seq models like DistilBart.
-    return pipeline("text2text-generation", model="sshleifer/distilbart-cnn-12-6", device=-1)
-
-def summarize_text(text, summarizer):
+def load_model_assets():
+    """
+    Loads the model and tokenizer directly, bypassing the broken 'pipeline' shortcut.
+    """
+    model_name = "sshleifer/distilbart-cnn-12-6"
     try:
-        if len(text) < 50: return "Email is too short to summarize."
-        # Truncate to keep it fast
-        result = summarizer(text[:1000], max_length=130, min_length=30, do_sample=False)
-        # The output format might be slightly different depending on pipeline version, 
-        # usually it is a list of dicts.
-        return result[0]['generated_text']
+        tokenizer = AutoTokenizer.from_pretrained(model_name)
+        model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
+        # Move model to CPU explicitly to ensure it runs in environments without GPU access
+        model.to('cpu') 
+        return model, tokenizer
     except Exception as e:
-        return f"Error: {e}"
+        st.error(f"Failed to load AI model: {e}")
+        return None, None
+
+def summarize_text(text, model, tokenizer):
+    if model is None or tokenizer is None:
+        return "Model not loaded."
+        
+    try:
+        if len(text) < 50: 
+            return "Email is too short to summarize."
+        
+        # 1. Prepare text (Truncate to 1024 tokens for efficiency)
+        inputs = tokenizer(text[:1024], return_tensors="pt", max_length=1024, truncation=True)
+        
+        # 2. Generate Summary
+        # Using parameters standard for summarization (Beam Search)
+        summary_ids = model.generate(
+            inputs["input_ids"],
+            max_length=130,
+            min_length=30,
+            length_penalty=2.0,
+            num_beams=4,
+            early_stopping=True
+        )
+        
+        # 3. Decode result
+        return tokenizer.decode(summary_ids[0], skip_special_tokens=True)
+    except Exception as e:
+        return f"Error during summarization: {e}"
 
 # --- 3. MAIN APP ---
 
@@ -185,7 +211,8 @@ if uploaded_file:
     results_df = df[mask]
 
     # Load AI Model (Load once after data is ready)
-    summarizer = load_summarizer()
+    # This now returns a tuple (model, tokenizer)
+    model, tokenizer = load_model_assets()
 
     # --- DISPLAY RESULTS ---
     if not results_df.empty:
@@ -218,7 +245,7 @@ if uploaded_file:
                     # Summarize Button
                     if st.button(f"✨ Summarize this Email", key=f"sum_{index}", use_container_width=True):
                         with st.spinner("AI is analyzing..."):
-                            summary = summarize_text(body, summarizer)
+                            summary = summarize_text(body, model, tokenizer)
                             st.success(summary)
                 
                 st.markdown("<br>", unsafe_allow_html=True)
