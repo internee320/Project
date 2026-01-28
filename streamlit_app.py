@@ -80,12 +80,30 @@ st.markdown("""
         color: #0f172a;
     }
 
-    /* --- TEXT AREA FIX (DARK BLACK TEXT) --- */
-    /* This specifically targets the textarea element inside the Streamlit component */
+    /* --- TEXT AREA FIX (DARK MODE COMPATIBLE) --- */
+    /* This specifically targets the textarea element to ensure high contrast */
+    
+    /* General text area styling */
     div[data-testid="stTextArea"] textarea {
-        color: #000000 !important;      /* Force Pure Black Text */
-        background-color: #ffffff !important; /* Ensure White Background */
-        opacity: 1 !important;           /* Remove the 'grayed out' disabled effect */
+        background-color: #ffffff !important; /* Force White Background */
+        color: #1e293b !important;            /* Force Dark Blue/Grey Text */
+        opacity: 1 !important;                /* Ensure no transparency */
+    }
+
+    /* Specific override for DISABLED text areas (the email viewer) */
+    /* Disabled inputs are harder to style, so we use -webkit-text-fill-color */
+    div[data-testid="stTextArea"] textarea:disabled {
+        background-color: #f1f5f9 !important; /* Light Gray Background for "Read-only" look */
+        color: #1e293b !important;            /* Dark Text */
+        -webkit-text-fill-color: #1e293b !important; /* Crucial for Chrome/Safari Dark Mode */
+        opacity: 1 !important;
+    }
+
+    /* Ensure the summary text is readable if using st.success in Dark Mode */
+    .stSuccess {
+        background-color: #dcfce7 !important;
+        color: #14532d !important;
+        border-left: 4px solid #16a34a !important;
     }
 </style>
 """, unsafe_allow_html=True)
