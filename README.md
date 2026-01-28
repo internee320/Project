@@ -1,2 +1,2 @@
 🌐 Live App
-🔗 Try it here: https://project-362zf8n6mcpsoddajdemgl.streamlit.app/
+🔗 Try it here: https://project-qhd8zqj6en2eojkkqpgduk.streamlit.app/
