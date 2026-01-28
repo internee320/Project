@@ -94,15 +94,18 @@ st.markdown("""
 
 @st.cache_resource
 def load_summarizer():
-    # Load a smaller, faster model for CPU
-    return pipeline("summarization", model="sshleifer/distilbart-cnn-12-6", device=-1)
+    # FIX: Changed "summarization" to "text2text-generation" to avoid KeyError in some environments.
+    # This performs the exact same function for Seq2Seq models like DistilBart.
+    return pipeline("text2text-generation", model="sshleifer/distilbart-cnn-12-6", device=-1)
 
 def summarize_text(text, summarizer):
     try:
         if len(text) < 50: return "Email is too short to summarize."
         # Truncate to keep it fast
         result = summarizer(text[:1000], max_length=130, min_length=30, do_sample=False)
-        return result[0]['summary_text']
+        # The output format might be slightly different depending on pipeline version, 
+        # usually it is a list of dicts.
+        return result[0]['generated_text']
     except Exception as e:
         return f"Error: {e}"
 
@@ -159,24 +162,24 @@ if uploaded_file:
     # Apply filters ONLY if the user typed something in that box
     if search_username:
         if 'username' in df.columns:
-            mask &= df['username'].str.contains(search_username, case=False, na=False)
+            mask &= df['username'].astype(str).str.contains(search_username, case=False, na=False)
         else:
             st.warning("Column 'username' not found in CSV.")
 
     if search_email:
         if 'email' in df.columns:
-            mask &= df['email'].str.contains(search_email, case=False, na=False)
+            mask &= df['email'].astype(str).str.contains(search_email, case=False, na=False)
         else:
             st.warning("Column 'email' not found in CSV.")
 
     if search_dept:
         if 'department' in df.columns:
-            mask &= df['department'].str.contains(search_dept, case=False, na=False)
+            mask &= df['department'].astype(str).str.contains(search_dept, case=False, na=False)
         else:
             st.warning("Column 'department' not found in CSV.")
 
     if search_body:
-        mask &= df['body'].str.contains(search_body, case=False, na=False)
+        mask &= df['body'].astype(str).str.contains(search_body, case=False, na=False)
 
     # Get Filtered Results
     results_df = df[mask]
